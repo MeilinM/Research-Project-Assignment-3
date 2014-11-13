@@ -1,5 +1,5 @@
 # Research Project - Assignment-3
-## Third Pair Assignment: Nicolas Rosemberg & Meilin Möllenkamp
+## Nicolas Rosemberg & Meilin Möllenkamp
 ### MPP-E1180: Introduction to Collaborative Social Science Data Analysis
 ===============================
 
