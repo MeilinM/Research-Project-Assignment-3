@@ -1,5 +1,5 @@
-# Research Project - Assignment-3
-===============================
+Research Project - Assignment-3
+
 ## Authors: Nicolas Rosemberg & Meilin Möllenkamp
 ### MPP-E1180: Introduction to Collaborative Social Science Data Analysis
 
