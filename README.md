@@ -21,7 +21,7 @@ In addition to the Readme file, our repository "CollaborativeResearchProject" co
 
 1. The RMD file requires to run the R file first for loading and cleaning the data. The R file saves the organized and cleaned data files in the working directory and the RMD file opens them from the same folder after the working directory is set correctly.
 
-2. The referenced literature can be found in the BibTeX file "Literature.bib". The R Packages used for the proposal are cited in the BibTeX file "Packages.bib". As the BibTeX files and the RMD file are dynamically linked, it is important to save all three files again in the same folder when trying to run the RMD file.  
+2. The R Packages used for the proposal are cited in the BibTeX file "Packages.bib". As the BibTeX file and the RMD file are dynamically linked, it is important to save both files again in the same folder when running the RMD file.  
 
 3. The RMD file is running descriptive and inferential statistics if the previous steps were followed.
 
@@ -33,12 +33,12 @@ We have used data from the World Bank and the UNAIDS database. The data of the W
 
 The Rmd File has the following structure:
 
-Preparation
-Descriptive Statistics
-Inferential Statistics
-Limitations
-Bibliography
-Appendix
+* Preparation
+* Descriptive Statistics
+* Inferential Statistics
+* Limitations
+* Bibliography
+* Appendix
 
 ===============================
 
