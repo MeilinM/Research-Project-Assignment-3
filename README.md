@@ -2,7 +2,7 @@ Research-Project---Assignment-3
 ===============================
 ### MPP-E1180: Introduction to Collaborative Social Science Data Analysis
 
-## Third Pair Assignment: Nicolas Rosemberg & Meilin Möllenkamp
+### Third Pair Assignment: Nicolas Rosemberg & Meilin Möllenkamp
 
 R version 3.1.1 (2014-07-10) Copyright (C) 2014 The R Foundation for Statistical Computing Platform: x86_64-apple-darwin13.1.0 (64-bit)
 
@@ -45,9 +45,9 @@ Appendix
 # Task for Assignment 3:
 
 The task for this assignment was to:
--- gather web based data from at least two sources
--- merge the data sets
--- conduct basic inferential statistics on the data to address a relevant research question and briefly describe the results       including with dynamically generated tables and figures
+*gather web based data from at least two sources
+*merge the data sets
+*conduct basic inferential statistics on the data to address a relevant research question and briefly describe the results       including with dynamically generated tables and figures
 
 Word count:
 1,500 words maximum
