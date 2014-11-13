@@ -18,7 +18,7 @@ In addition to the Readme file, our repository "CollaborativeResearchProject" co
 
 ===============================
 
-## How to proceed with the files in our repository:
+## How to proceed with the Files in our Repository:
 
 1. The RMD file requires to run the R file first for loading and cleaning the data. The R file saves the organized and cleaned data files in the working directory and the RMD file opens them from the same folder after the working directory is set correctly.
 
