@@ -45,9 +45,9 @@ Appendix
 # Task for Assignment 3:
 
 The task for this assignment was to:
-*gather web based data from at least two sources
-*merge the data sets
-*conduct basic inferential statistics on the data to address a relevant research question and briefly describe the results       including with dynamically generated tables and figures
+* gather web based data from at least two sources
+* merge the data sets
+* conduct basic inferential statistics on the data to address a relevant research question and briefly describe the results       including with dynamically generated tables and figures
 
 Word count:
 1,500 words maximum
