@@ -1,7 +1,6 @@
-Research Project - Assignment-3
-
+MPP-E1180: Introduction to Collaborative Social Science Data Analysis
+# Research Project - Assignment-3
 ## Authors: Nicolas Rosemberg & Meilin Möllenkamp
-### MPP-E1180: Introduction to Collaborative Social Science Data Analysis
 
 R version 3.1.1 (2014-07-10) Copyright (C) 2014 The R Foundation for Statistical Computing Platform: x86_64-apple-darwin13.1.0 (64-bit)
 
