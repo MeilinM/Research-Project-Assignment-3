@@ -16,7 +16,7 @@ Please report any bugs or suggestions at: https://github.com/MeilinM/Research-Pr
 
 ## Instructions and background information on our repository:
 
-In addition to the Readme file, our repository "CollaborativeResearchProject" contains two BibTeX files, an R file, an RMD file, a PDF file and an HTML file. The PDF and the HTML were created using the knit function of R Studio.
+In addition to the Readme file, our repository "Research-Project-Assignment-3" contains a BibTeX file, an R file, an RMD file, a PDF file and an HTML file. The PDF and the HTML were created using the knit function of R Studio.
 
 
 
