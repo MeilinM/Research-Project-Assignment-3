@@ -20,11 +20,13 @@ In addition to the Readme file, our repository "CollaborativeResearchProject" co
 
 ## How to proceed with the Files in our Repository:
 
-1. The RMD file requires to run the R file first for loading and cleaning the data. The R file saves the organized and cleaned data files in the working directory and the RMD file opens them from the same folder after the working directory is set correctly.
+1. The first file that must be opened is the .R file. This code will gather and clean the data. Please note that one of the databases must be first downloadad to the working directory. The link to download the database is included in the code. After running the .R file, the cleaned databases will be stored in the working directory.
 
-2. The R Packages used for the proposal are cited in the BibTeX file "Packages.bib". As the BibTeX file and the RMD file are dynamically linked, it is important to save both files again in the same folder when running the RMD file.  
+2. the RMD file opens them from the same folder after the working directory is set correctly.
 
-3. The RMD file is running descriptive and inferential statistics if the previous steps were followed.
+3. The R Packages used for the proposal are cited in the BibTeX file "Packages.bib". As the BibTeX file and the RMD file are dynamically linked, it is important to save both files again in the same folder when running the RMD file.  
+
+4. The RMD file is running descriptive and inferential statistics if the previous steps were followed.
 
 
 ## Content of our Repository:
