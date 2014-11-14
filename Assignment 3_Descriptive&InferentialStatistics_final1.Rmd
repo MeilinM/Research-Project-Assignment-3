@@ -89,7 +89,9 @@ Once both databases were cleaned, the next step was to merge the datasets using 
 The descriptive statistics part consists of the preparation of the variables for data analysis. Tables, plots and histograms are shown to understand the distribution of the variables. 
 Table 1 shows the main descriptive statistics of all the variables that can be found in the cleaned dataset (number of observations, mean, standard deviation, and min and max values).
 
-
+```{r, echo=FALSE, type = 'latex', header = FALSE}
+stargazer(Merged, type = "text", title="Table 1: Descriptive statistics", digits=1, out="table1.txt")
+```
 
 The histogram of the dependent variable (Figure 1) shows that the incidence rates are not normally distributed but strongly skewed to the left and only few incidence rates are higher than 1. 
 
@@ -135,6 +137,15 @@ ggsave("fig4.png", width=8, height=10, dpi=100)
 ```
 
 Further, a dummy variable was created assigning a value of zero for those observations where the incidence rate decreased compared to the previous year or stayed the same (countries reaching MDG 6.A) and a value of one was assigned to those observations where the incidence rate increased (countries not reaching MDG 6.A). Figure 4 shows the direction of the change in the incidence rate compared to the previous year by country.
+
+```{r, echo=FALSE}
+
+### 1. Plotting the new dependent variable
+
+# Histogram of new dependent variable
+Histdep <- hist(Merged$DDif, breaks= seq(0,1.5,by=0.1), xlab="Dummy Coding: Change in Incidence Rate", main="Figure 5: Dummy Variable")
+axis(side=2, at=seq(0,800,100), labels=seq(0,800,100))
+```
 
 Scatterplots were used for each category of Dahlgrehn's model in order to see whether the variables are skewed or multicollinear (Figures 5, 6 & 7).
 
