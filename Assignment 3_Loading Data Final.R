@@ -3,7 +3,7 @@
 ####################################################################################
 
 # setwd("/Users/Meilin/Desktop/Collaborative Social Data/CollaborativeResearchProject")
-# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject")
+# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 # 1. Loading Required Packages
 
