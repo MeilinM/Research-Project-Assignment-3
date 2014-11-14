@@ -379,10 +379,6 @@ Merged$QInteraction[Merged$lFemSchool>3.034 & Merged$lFemSchool<=4.622 & Merged$
 Merged$QInteraction[Merged$lFemSchool>4.622 & Merged$lFemSchool<=4.697 & Merged$lFemUnemploy<=2.092 & Merged$lFemUnemploy>1.559] <-3
 Merged$QInteraction[Merged$lFemSchool>4.697 & Merged$lFemUnemploy<=1.459] <-4
 
-Merged$QInteraction[Merged$Interaction<=6.82] <-1
-Merged$QInteraction[Merged$Interaction>6.82 & Merged$Interaction<=9.508] <-2
-Merged$QInteraction[Merged$Interaction>9.508 & Merged$Interaction<=11.469] <-3
-Merged$QInteraction[Merged$Interaction>11.469] <-4
 
 # Regressing the model with the new independent variable without the interaction
 L5 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl + lLifeExpect + lDPT + lMeasles + as.factor(QFemSchool),
@@ -416,3 +412,5 @@ fitted_L6_final <- predict(L6, newdata = fitted_L6,
                             type = 'response')
 fitted_L6_final
 
+# Creating a .csv file with the final version of the data
+write.csv(Merged, file="MergedData")
