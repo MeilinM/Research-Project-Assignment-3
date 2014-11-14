@@ -136,13 +136,21 @@ ggsave("fig4.png", width=8, height=10, dpi=100)
 
 Further, a dummy variable was created assigning a value of zero for those observations where the incidence rate decreased compared to the previous year or stayed the same (countries reaching MDG 6.A) and a value of one was assigned to those observations where the incidence rate increased (countries not reaching MDG 6.A). Figure 4 shows the direction of the change in the incidence rate compared to the previous year by country.
 
+```{r, echo=FALSE}
+
+### 1. Plotting the new dependent variable
+
+# Histogram of new dependent variable
+Histdep <- hist(Merged$DDif, breaks= seq(0,1.5,by=0.1), xlab="Dummy Coding: Change in Incidence Rate", main="Figure 5: Dummy Variable")
+```
+
 Scatterplots were used for each category of Dahlgrehn's model in order to see whether the variables are skewed or multicollinear (Figures 5, 6 & 7).
 
 ```{r, echo=FALSE}
 ### 2. Plotting the independent variables
 
 # Scatterplot of variables for socio-economic, cultural and environmental conditions
-scatterplotMatrix(~ Incidence + + GDP + GDPpc + Rural + CO2 + LifeExpect + Population, 
+scatterplotMatrix(~ Incidence + GDP + GDPpc + Rural + CO2 + LifeExpect + Population, 
                   transform=TRUE, data=Merged)
 ```
 
