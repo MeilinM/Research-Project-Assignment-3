@@ -333,3 +333,9 @@ labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School', '3rd R
             '4th Ranked School')
 
 stargazer::stargazer(L1, L2, L3, covariate.labels = la title = 'Logistic Regression Estimates of Grad Sch digits = 2, type = 'latex', header = FALSE)
+
+
+
+LIMITATIONS
+
+A simpler and more common model on the main determinants of health is the ???rainbow model???, developed by Dahlgren and Whitehead (Dahlgren and Whitehead (1991), p.11). This model gives an overview of the main health determinants, reflecting the relationship between the individual, its environment and different health outcomes. Individuals are at the centre of the model with a set of fixed biological and genetical preconditions. Building upon these, four layers of influence on health can be identified: individual lifestyle factors, social and community networks, living and working conditions and general socio-economic, cultural and environmental conditions.
