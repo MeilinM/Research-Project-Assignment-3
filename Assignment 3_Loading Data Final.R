@@ -2,7 +2,7 @@
 ########## SETTING THE WORKING DIRECTORY AND LOADING REQUIRED PACKAGES #############
 ####################################################################################
 
-# setwd("/Users/Meilin/Desktop/Collaborative Social Data/CollaborativeResearchProject")
+# setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
 # setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 # 1. Loading Required Packages
@@ -232,26 +232,6 @@ Merged <- merge(dataset, HIVcountry,
                 by = c('iso2c','year'))
 summary(Merged)
 
-# Looking at the observations lost during the merging process
-datasetR <- datasetR[, c(1)]
-HIVcountryR <- HIVcountryR[, c(2)]
-
-FullMerge <- merge(dataset, HIVcountry,
-                     by = c('iso2c'), all.y=TRUE )
-
-rows.in.a1.that.are.not.in.a2  <- function(datasetR,MergedR)
-{
-  datasetR.vec <- apply(datasetR, 1, paste, collapse = "")
-  MergedR.vec <- apply(MergedR, 1, paste, collapse = "")
-  a1.without.a2.rows <- datasetR[!datasetR.vec %in% MergedR.vec,]
-  return(a1.without.a2.rows)
-}
-LostinMerge <- rows.in.a1.that.are.not.in.a2(datasetR,MergedR)
-
-install.packages("xlsm")
-library(xlsx)
-write.xlsx(dataset, "/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/dataset.xlsx")
-
 ####################################################################################
 ########################## CLEANING THE MERGED DATABASE ############################
 ####################################################################################
@@ -275,7 +255,7 @@ Merged <- slide(Merged, Var = "Incidence", GroupVar = "iso2c", slideBy = -1,
 Merged$IncidenceDif <- as.numeric(Merged$Incidence) - as.numeric(Merged$Incidence2)
 
 # Creating a dummy variable for countries with IndicenceDif>0
-Merged$DDif <- as.numeric(Merged$IncidenceDif>0)
+Merged$DDif <- as.numeric(Merged$IncidenceDif<=0)
 
 # 8. Creating .csv to speed up the loading of the data
 

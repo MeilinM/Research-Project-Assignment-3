@@ -21,8 +21,8 @@ b')
 
 # error=FALSE
 # Setting the Working Directory
-setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
-# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject")
+# setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
+# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 
 # Loading the merged file from the Working directory
@@ -101,10 +101,13 @@ In most regions of the world HIV incidences decreased between the period of 2000
 IncT <- ggplot(aes(x = year, y = Incidence), data = Merged) + geom_point(position = "jitter") + theme_bw() + geom_smooth()
 options(digits=0)
 IncT <- IncT + ggtitle("Figure 2: Incidence Rate over Time") + theme(plot.title = element_text(lineheight=3, face="bold"))
-ggsave("fig2.png", width=5, height=5, dpi=100, device = pdf)
+ggsave("fig2.pdf", width=5, height=5, dpi=100, device = pdf)
 ```
 
-![Figure 2: Incidence Rate over Time] (/fig2.png)
+
+
+![fig2]("https://github.com/MeilinM/Research-Project-Assignment-3/blob/master/fig2.png"")
+
 
 When plotting the incidence rates per country (Figure 3) the countries with high incidence rates can be identified and the ranges of the observations per country are shown.
 
@@ -338,10 +341,4 @@ stargazer::stargazer(L1, L2, L3, covariate.labels = la title = 'Logistic Regress
 
 LIMITATIONS
 
-The paper had to make some compromises regarding its original aims that were outlined in the first research proposal.
-
-1. Due to huge amounts of missing data and some problems with multicollinearity lots of variables had to dropped and could ultimately not be integrated in the logistic regression models. Therefore, the categories that were supposed to be tested 
-
-
-are facing some limitations 
 A simpler and more common model on the main determinants of health is the ???rainbow model???, developed by Dahlgren and Whitehead (Dahlgren and Whitehead (1991), p.11). This model gives an overview of the main health determinants, reflecting the relationship between the individual, its environment and different health outcomes. Individuals are at the centre of the model with a set of fixed biological and genetical preconditions. Building upon these, four layers of influence on health can be identified: individual lifestyle factors, social and community networks, living and working conditions and general socio-economic, cultural and environmental conditions.
