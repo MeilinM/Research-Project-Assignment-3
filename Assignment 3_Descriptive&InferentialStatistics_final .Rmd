@@ -9,11 +9,8 @@ authors: Meilin Moellenkamp and Nicolas Rosemberg
 toc: yes
 ---
 
-
 ```{r, echo=FALSE, include=FALSE}
-
 ### 1. Setting Working Directory & Loading the data
-
 # error=FALSE
 # Setting the Working Directory
 setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
@@ -76,24 +73,23 @@ Merged$Measles <- as.numeric(Merged$Measles)
 
 This section focuses on the process of gathering the data and cleaning the databases to prepare the variables for the data analysis. 
 
-The first step in this process was uploading the databases to R Studio. The first dataset consists of 29 World Development Indicators and it was downloaded from World Bank???s website. These indicators represent the independent variables used for this research plus the population indicator that is used to filter small countries. Provided that the focus of this research is on country level data, all regional data was dropped. Further, 169 rows that contained only NA values were deleted.
+The first step in this process was uploading the databases to R Studio. The first dataset consists of 29 World Development Indicators and it was downloaded from World Bank's website. These indicators represent the independent variables used for this research plus the population indicator that is used to filter small countries. Provided that the focus of this research is on country level data, all regional data was dropped. Further, 169 rows that contained only NA values were deleted.
 
 After dropping empty rows, the data frame was alphabetically (ascending) ordered, rows were grouped by iso2c code and variables were renamed.
 
 The dataset was further cleaned preparing the data for imputation using the AMELIA package. The imputation will be conducted however at a further stage of the research. This process requires that the panel is as balanced as possible, as it feeds from all variables to predict values for the missing observations. The next step was thus dropping variables for which more than 80% of the observations (552) were missing.  In addition, countries with a population smaller than one million inhabitants were dropped from the database. 59 countries fell in that category: 46 islands, 5 European countries (Andorra, Liechtenstein, Luxemburg, Monaco and Montenegro), Bahrain, Bhutan, Belize, Djibouti, Equatorial Guinea, Guyana, Qatar and Suriname. Dropping these countries does not affect the research as the remaining database still contains a highly heterogeneous sample both in geographic and socio-economic terms. Furthermore, deleting these countries improves the dataset as most of these countries lacked information for most of the studied variables. 
  
-The second database used for this research was downloaded from UNAIDS??? website and it provides information on HIV/AIDS incidence rates (as well as prevalence and deaths caused by HIV/AIDS). The data is publicly available. All columns except the country and the incidence rate were dropped. 
-After renaming the variables, a unique identifier was created and missing values were recoded as NAs. Moreover, some observations in the database were not specific numbers; instead, it was indicated that for that year, prevalence was below a certain threshold (0.01%). In those cases, these observations were replaced by 0.009. The final step in the cleaning of the UNAIDS database consisted of deleting missing values for the dependent variable and deleting the regions with an iso2c equal to a country???s iso2c (NA and ZA) to avoid problems in the merging process. 
+The second database used for this research was downloaded from UNAIDS' website and it provides information on HIV/AIDS incidence rates (as well as prevalence and deaths caused by HIV/AIDS). The data is publicly available. All columns except the country and the incidence rate were dropped. 
+After renaming the variables, a unique identifier was created and missing values were recoded as NAs. Moreover, some observations in the database were not specific numbers; instead, it was indicated that for that year, prevalence was below a certain threshold (0.01%). In those cases, these observations were replaced by 0.009. The final step in the cleaning of the UNAIDS database consisted of deleting missing values for the dependent variable and deleting the regions with an iso2c equal to a country's iso2c (NA and ZA) to avoid problems in the merging process. 
 
-Once both databases were cleaned, the next step was to merge the datasets using the combination of iso2c and year as unique identifier. In the merging process, only observations that were present in both datasets were kept. It is worth noticing that UNAIDS??? dataset included observations from 1990 to 2012 so all observation between 1990 and 1999 were dropped. Finally, unnecessary columns from the new database were eliminated.
+Once both databases were cleaned, the next step was to merge the datasets using the combination of iso2c and year as unique identifier. In the merging process, only observations that were present in both datasets were kept. It is worth noticing that UNAIDS' dataset included observations from 1990 to 2012 so all observation between 1990 and 1999 were dropped. Finally, unnecessary columns from the new database were eliminated.
 
+# 2. Descriptive Statistics
 
-# 1. Descriptive Statistics
-
-The descriptive statistics part consists in the preparation of the variables for data analysis. Tables, plots and histograms are shown to understand the distribution of the variables. 
+The descriptive statistics part consists of the preparation of the variables for data analysis. Tables, plots and histograms are shown to understand the distribution of the variables. 
 Table 1 shows the main descriptive statistics of all the variables that can be found in the cleaned dataset - showing the number of observations, mean, standard deviation, and min and max values.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, type = 'latex', header = FALSE}
 stargazer(Merged, type = "text", title="Table 1: Descriptive statistics", digits=1, out="table1.txt")
 ```
 
@@ -150,7 +146,7 @@ Histdep <- hist(Merged$DDif, breaks= seq(0,1.5,by=0.1), xlab="Dummy Coding: Chan
 axis(side=2, at=seq(0,800,100), labels=seq(0,800,100))
 ```
 
-Scatterplots were used for each category of the Dahlgrehn model in order to see whether the variables are skewed or multicollinear (Figures 5, 6 & 7).
+Scatterplots were used for each category of Dahlgrehn's model in order to see whether the variables are skewed or multicollinear (Figures 5, 6 & 7).
 
 ```{r, echo=FALSE}
 ### 2. Plotting the independent variables
@@ -169,11 +165,9 @@ scatterplotMatrix(~ Incidence + DPT + Measles, transform=TRUE, data=Merged)
 ```
 
 
-####################################################################################
-########################### INFERENTIAL STATISTICS #################################
-####################################################################################
+# 3. Inferential Statistics
 
-As can be seen from the Scatterplots in the descriptive statistics most of the variables are not normally distributed. Further, the variables all have different scales. Therefore, the independent variables were logged for enabling comparisons in the inferential statistics part.
+As can be seen from the Scatterplots in the descriptive statistics most of the variables are not normally distributed. Further, the variables all have different scales. Therefore, the independent variables were logged for enabling comparisons in the data analysis part.
 
 ```{r, echo=FALSE, include=FALSE}
 # Logging the independent variables for better comparability
@@ -194,13 +188,14 @@ Merged$lDPT <- log(Merged$DPT)
 Merged$lMeasles <- log(Merged$Measles)
 ```
 
+
 ```{r, echo=FALSE, include=FALSE}
 # Creating a variable with the inverse from FemUnempl
 Merged$Inverse <- 1/Merged$FemUnempl
 Merged$Inverse <- log(Merged$Inverse)
 ```
 
-As the dependent variable is coded as a dummy, being 0 if MDG 6.A was fulfilled and 1 for countries that don't fulfill MDG 6.A logistic regressions are used for the inferential statistics part. As Odds and Odds ratios are difficult to present to an audience that is not only consisting of statistical experts predicted probabilities are calculated following the logistic regressions. The interpretation of the results will only focus on the predicted probabilities.
+As the dependent variable is coded as a dummy, being 1 if MDG 6.A is reached and 0 for countries that are not reaching MDG 6.A logistic regressions are used for the inferential statistics part. As Odds and Odds ratios are difficult to present to a broad audience predicted probabilities are calculated after running the logistic regressions. The interpretation of the results will mainly focus on the predicted probabilities.
 
 ```{r, echo=FALSE, include=FALSE}
 # MODEL 1 - Running a general logistic regression using all independent variables
@@ -209,12 +204,12 @@ L1 <- glm(DDif ~ lGDP + lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitatio
 summary(L1)
 ```
 
+The test for variance inflation factors showed that in our first logistic regression model six variables showed high multicollinearity and had a heigher variance inflation than the threshold of 10. We tested the multicollinearity between the variables and found that there was high multicollinearity between the GDP and GDP per capital, Unemployment and Female unemployment, Primary education and female schooling. Therefore, we excluded one of these multicollinear variables for each group based on their explanatory strength for our research question, namely unemployment, primary education and GDP.
+
 ```{r, echo=FALSE}
 # Testing for multicollinearity
 vif(L1)
 ```
-
-The test for variance inflation factors showed that in our first logistic regression model six variables showed high multicollinearity and had a heigher variance inflation than the threshold of 10. We tested the multicollinearity between the variables and found that there was high multicollinearity between the GDP and GDP per capital, Unemployment and Female unemployment, Primary education and female schooling. Therefore, we excluded one of these multicollinear variables for each group based on their explanatory strength for our research question, namely unemployment, primary education and GDP.
 
 We tested the variance inflation factors of the new logistic regression model and all remaining variables passed the test.
 
@@ -232,14 +227,19 @@ summary(L2)
 vif(L2)
 ```
 
-```{r, echo=FALSE} 
+```{r, echo=FALSE, include=FALSE} 
 # MODEL 3 - GDPpc
 L3 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl + lFemSchool + lLifeExpect + lDPT + lMeasles,
           data=Merged, family = 'binomial')
 summary(L3)
+```
+
+```{r, echo=FALSE} 
 # Testing for multicollinearity
 vif(L3)
+```
 
+```{r, echo=FALSE}
 # Looking at confidence intervals
 confint(L3)
 
@@ -323,7 +323,7 @@ fitted_L5 <- with(Merged,
 fitted_L5
 
 # Calculating the predicted probabilities
-fitted_L5$fitted_L5_final <- predict(L5, newdata = fitted_L5,
+fitted_L5_final <- predict(L5, newdata = fitted_L5,
                            type = 'response')
 fitted_L5_final
 
@@ -366,7 +366,7 @@ fitted_L6
 
 
 # Calculating the predicted probabilities
-fitted_L6$fitted_L6_final <- predict(L6, newdata = fitted_L6,
+fitted_L6_final <- predict(L6, newdata = fitted_L6,
                             type = 'response')
 fitted_L6_final
 
@@ -379,8 +379,10 @@ fitted_L6_final
 # anova(L4,test="Chisq")
 ```
 
-The results of the logistic regressions were exported with Stargazer. Table 2 shows the logistic regression results. The results table shows that out of all the tested variables in the model only the variable Sanitation has a significant impact on changes in HIV/Aids incidence rates fo.
+LOGISTIC REGRESSION
 
+The rest of this section focuses on logistic regressions using only those variables where no clear multicollinearity was observed.
+The results of the logistic regressions were exported with Stargazer. Table 2 shows the logistic regression results. The results show that out of all the tested variables in the model only the variable Sanitation has a significant impact on changes in HIV/Aids incidence rates.
 
 ```{r, echo=FALSE, type = 'latex', header = FALSE}
 #### SAVING THE REGRESSION OUTPUTS WITH STARGAZER
@@ -388,29 +390,36 @@ The results of the logistic regressions were exported with Stargazer. Table 2 sh
 stargazer(L4, L5, L6, title="Table 2: Logistic Regression Results", type="text",align=TRUE, out="OddsResults.txt")
 ```
 
+PREDICTED PROBABILITIES
+
+All three predicted probability models fix the values of all independent variables except one to the mean values of Uganda, an interesting case given the failure of this country to contain the spread of HIV/AIDS. The first regression looks at the impact of female school enrolment on the dependent variable.
+
+As it can be observed, the probability of successfully halting or reversing the spread of HIV/AIDS does not change substantially when female school enrolment increases. In fact, the probability of being successful at combating the disease falls between the first and the second quintile and between the third and the forth. 
 
 ```{r, echo=FALSE, type = 'latex', header = FALSE}
 # Predicted Probabilities Model 1
 stargazer(fitted_L4_final, title="Predicted Probabilities Model 1", type="text",align=TRUE, out="models.txt")
 ```
 
+The second regression (Predicted Probabilities Model 2) focuses on the single impact of female unemployment in halting and reversing the spread of HIV/AIDS.  The predicted probabilities of this model show a similar pattern as in the first model, although the discrepancy in the probabilities of being successfully are larger in this model. 
+
 ```{r, echo=FALSE, type = 'latex', header = FALSE}
 # Predicted Probabilities Model 2
 stargazer(fitted_L5_final, title="Predicted Probabilities Model 2", type="text",align=TRUE, out="models.txt")
 ```
-
-```{r, echo=FALSE, type = 'latex', header = FALSE }
+Finally, the third model (Predicted Probabilities Model 3) integrates the interaction between both variables. As with model 2 and 3, there is a discontinuous reduction in the probability of successfully halting and reversing the spread of HIV/AIDS and the probability decreases between quintile one and two and between quintile three and four. 
+```{r, echo=FALSE, type = 'latex', header = FALSE}
 # Predicted Probabilities Model 3
 stargazer(fitted_L6_final, title="Predicted Probabilities Model 3", type="text",align=TRUE, out="models.txt")
 ```
+All three models show inconsistent results with the predictions of this paper. The disproportionate number of cases of successful halt and reverse of HIV/AIDS in the sample might be responsible for the inconsistency of the results.
 
+# 4. Limitations
 
-LIMITATIONS
-
-The paper had to make some compromises regarding its original aims that were outlined in the first research proposal.
-
-1. Due to huge amounts of missing data and some problems with multicollinearity lots of variables had to dropped and could ultimately not be integrated in the logistic regression models. Therefore, the categories that were supposed to be tested 
-
-
-are facing some limitations 
-A simpler and more common model on the main determinants of health is the ???rainbow model???, developed by Dahlgren and Whitehead (Dahlgren and Whitehead (1991), p.11). This model gives an overview of the main health determinants, reflecting the relationship between the individual, its environment and different health outcomes. Individuals are at the centre of the model with a set of fixed biological and genetical preconditions. Building upon these, four layers of influence on health can be identified: individual lifestyle factors, social and community networks, living and working conditions and general socio-economic, cultural and environmental conditions.
+The paper had to make some compromises regarding its original aim as outlined in the first research proposal. Due to the significant amount of missing values and the presence of multicollinearity, a considerable number of variables had to be dropped and could ultimately not be integrated in the logistic regression models. 
+ 
+The selection of these variables was not arbitrary but followed instead the theoretical framework guiding this research, i.e. Dahlgren's model. Two levels of Dahlgren's model (Social and Community Networks and Individual Lifestyle Factors) ended up underrepresented after dropping these variables. To deal with this limitation, the research will only use the theoretical framework as an instrument to guide the selection of variables but will not utilise the findings to test the validity of the model. 
+ 
+In terms of the data used to run the regressions, the relative high number of countries that have already halted or reversed the spread of HIV/AIDS in our sample can lead to biased results. In the next stage of the research, the effect of excluding those countries that only halted the spread will be explored. 
+ 
+Another shortcoming faced at this stage was the integration of figures from the descriptive statistics into the final report. A transitory solution was to save those pictures in a subfolder of the repository.
