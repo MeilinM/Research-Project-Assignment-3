@@ -370,15 +370,15 @@ Merged$QFemSchool[Merged$lFemSchool>4.697] <-4
 # Creating a new variable with the interaction between FemSchool and FemUnempl
 Merged$Interaction <- Merged$lFemSchool * Merged$lFemUnempl
 summary(Merged)
-
+as.numeric(Merged$Interaction)
 
 
 # Creating a new variable with the interaction by quintiles
-Merged$QInteraction[Merged$lFemSchool<=3.034 & Merged$lFemUnemploy>2.534] <-1
-Merged$QInteraction[Merged$lFemSchool>3.034 & Merged$lFemSchool<=4.622 & Merged$lFemUnemploy<=2.534 & Merged$lFemUnemploy>2.092] <-2
+Merged$QInteraction <- Merged$Interaction
+Merged$QInteraction[Merged$lFemSchool<=4.53 & Merged$lFemUnemploy>2.534] <-1
+Merged$QInteraction[Merged$lFemSchool>4.53 & Merged$lFemSchool<=4.622 & Merged$lFemUnemploy<=2.534 & Merged$lFemUnemploy>2.092] <-2
 Merged$QInteraction[Merged$lFemSchool>4.622 & Merged$lFemSchool<=4.697 & Merged$lFemUnemploy<=2.092 & Merged$lFemUnemploy>1.559] <-3
 Merged$QInteraction[Merged$lFemSchool>4.697 & Merged$lFemUnemploy<=1.459] <-4
-
 
 # Regressing the model with the new independent variable without the interaction
 L5 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl + lLifeExpect + lDPT + lMeasles + as.factor(QFemSchool),
