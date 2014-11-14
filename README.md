@@ -12,7 +12,7 @@ R Core Team (2014). R: A language and environment for statistical computing. R F
 Style guide: Hadley Wickham´s Style Guide from r-pkgs.had.co.nz/style.html.
 Please report any bugs or suggestions at: https://github.com/MeilinM/Research-Project-Assignment-3/issues/1
 
-Instructions and background information on our repository:
+## Instructions and background information on our repository:
 
 In addition to the Readme file, our repository "CollaborativeResearchProject" contains two BibTeX files, an R file, an RMD file, a PDF file and an HTML file. The PDF and the HTML were created using the knit function of R Studio.
 
