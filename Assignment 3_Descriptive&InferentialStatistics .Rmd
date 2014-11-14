@@ -22,7 +22,7 @@ b')
 # error=FALSE
 # Setting the Working Directory
 # setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
-setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
+# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 
 # Loading the merged file from the Working directory
@@ -101,7 +101,7 @@ In most regions of the world HIV incidences decreased between the period of 2000
 IncT <- ggplot(aes(x = year, y = Incidence), data = Merged) + geom_point(position = "jitter") + theme_bw() + geom_smooth()
 options(digits=0)
 IncT <- IncT + ggtitle("Figure 2: Incidence Rate over Time") + theme(plot.title = element_text(lineheight=3, face="bold"))
-ggsave("fig2.png", width=5, height=5, dpi=100, device = pdf)
+ggsave("fig2.pdf", width=5, height=5, dpi=100, device = pdf)
 ```
 
 
