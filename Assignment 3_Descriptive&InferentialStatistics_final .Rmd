@@ -21,8 +21,8 @@ b')
 
 # error=FALSE
 # Setting the Working Directory
-setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
-# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject")
+# setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
+setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject")
 
 
 # Loading the merged file from the Working directory
@@ -243,7 +243,9 @@ Merged$QFemSchool[Merged$lFemSchool<=4.53] <-1
 Merged$QFemSchool[Merged$lFemSchool>4.53 & Merged$lFemSchool<=4.622] <-2
 Merged$QFemSchool[Merged$lFemSchool>4.622 & Merged$lFemSchool<=4.697] <-3
 Merged$QFemSchool[Merged$lFemSchool>4.697] <-4
+```
 
+```{r, echo=FALSE, include=FALSE}
 # LOGISTIC REGRESSION - Regressing the model with FemSchool quintiles
 L4 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + Inverse + as.factor(QFemSchool) + lLifeExpect + lDPT + lMeasles,
             data=Merged, family = 'binomial')
@@ -259,7 +261,10 @@ plot(L4)
 Uganda <- subset(Merged,(country=="Uganda"))
 summary(Uganda)
 summary(Merged)
+```
 
+
+```{r, echo=FALSE, include=FALSE}
 # Regressing the model on FemSchool fixing the other indendent variables at Uganda's mean
 fitted_L4 <- with(Merged,
                   data.frame(lGDPpc = 7.003,
@@ -280,7 +285,11 @@ fitted_L4
 fitted_L4$fitted_L4_final <- predict(L4, newdata = fitted_L4,
                            type = 'response')
 fitted_L4_final
+```
 
+TEXT
+
+```{r, echo=FALSE, include=FALSE}
 # MODEL 5 - with the new independent variable without the interaction
 
 # Creating a new variable with Inverse by quintiles
