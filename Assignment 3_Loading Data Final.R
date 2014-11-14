@@ -1,3 +1,4 @@
+
 ####################################################################################
 ########## SETTING THE WORKING DIRECTORY AND LOADING REQUIRED PACKAGES #############
 ####################################################################################
@@ -441,13 +442,6 @@ fitted_L6
 fitted_L6_final <- predict(L6, newdata = fitted_L6,
                             type = 'response')
 fitted_L6_final
-
-# plot(L5)
-
-# Using the anova function to evaluate the effect on the deviance of adding the interaction term 
-# anova(L3,L4)
-
-# anova(L4,test="Chisq")
 
 # Creating a .csv file with the final version of the data
 write.csv(Merged, file="MergedData")
