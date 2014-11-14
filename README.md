@@ -17,15 +17,15 @@ Please report any bugs or suggestions at: https://github.com/MeilinM/Research-Pr
 ## Instructions and background information on our repository:
 
 In addition to the Readme file, our repository "Research-Project-Assignment-3" contains:
-- A BibTeX file
+
 - An R file
 - An RMD file
-- A PDF file
 - An HTML file
+- A PDF file
+- A BibTeX file
 - A subfolder containing images used for the descriptive statistics. 
  
 The PDF and the HTML were created using the knit function of R Studio.
-
 
 
 ## How to proceed with the Files in our Repository:
