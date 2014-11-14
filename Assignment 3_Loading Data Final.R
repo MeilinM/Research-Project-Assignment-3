@@ -31,7 +31,7 @@ library(XLConnect)
 library("countrycode")
 # install.packages ("ggplot2")
 library(ggplot2)
-# # install.packages ("magrittr") ???
+# # install.packages ("magrittr")
 library(magrittr)
 # install.packages ("fmsb")
 library(fmsb)
@@ -41,6 +41,10 @@ library(car)
 library(DataCombine)
 # install.packages("lmtest")
 library(lmtest)
+
+pkgs <- c("RJSONIO","WDI","dplyr","tidyr","knitr","DataCombine","lmtest","httr","XML","plyr","Amelia","XLConnect","countrycode","ggplot2","magrittr","fmsb","car","stargazer")
+
+repmis::LoadandCite(pkgs, file = 'RpackageCitations.bib')
 
 ####################################################################################
 ########################## LOADING AND CLEANING WDI DATA ###########################
