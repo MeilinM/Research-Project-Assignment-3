@@ -314,9 +314,13 @@ Merged$lLifeExpect <- log(Merged$LifeExpect)
 Merged$lDPT <- log(Merged$DPT)
 Merged$lMeasles <- log(Merged$Measles)
 
+# Creating a variable with the inverse from FemUnempl
+Merged$Inverse <- 1/Merged$FemUnempl
+Merged$Inverse <- log(Merged$Inverse)
+
 # Running a general logistic regression using all independent variables
 
-L1 <- glm(DDif ~ lGDP + lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lUnemploym + lPrimary + lHCexpendpc + lFemUnempl + lFemSchool + lLifeExpect + lDPT + lMeasles,
+L1 <- glm(DDif ~ lGDP + lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lUnemploym + lPrimary + lHCexpendpc + Inverse + lFemSchool + lLifeExpect + lDPT + lMeasles,
           data=Merged, family = 'binomial')
 summary(L1)
 
@@ -324,12 +328,12 @@ summary(L1)
 vif(L1)
 
 # Running the regression without multicollinear variables
-L2 <- glm(DDif ~ lGDP + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl + lFemSchool + lLifeExpect + lDPT + lMeasles,
+L2 <- glm(DDif ~ lGDP + lRural + lCO2 + lHCexpend + lWater + lSanitation + Inverse + lFemSchool + lLifeExpect + lDPT + lMeasles,
           data=Merged, family = 'binomial')
 summary(L2)
 
 
-L3 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl + lFemSchool + lLifeExpect + lDPT + lMeasles,
+L3 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + Inverse + lFemSchool + lLifeExpect + lDPT + lMeasles,
           data=Merged, family = 'binomial')
 summary(L3)
 
@@ -344,17 +348,6 @@ confint(L3)
 bptest(L3)
 coeftest(L3,vcov=hccm(L3))
 
-# Including an interaction term
-L4 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl * lFemSchool + lLifeExpect + lDPT + lMeasles,
-          data=Merged, family = 'binomial')
-summary(L4)
-plot(L4)
-
-# Using the anova function to evaluate the effect on the deviance of adding the interaction term 
-anova(L3,L4)
-
-anova(L4,test="Chisq")
-
 # Looking at Uganda's average values
 Uganda <- subset(Merged,(country=="Uganda"))
 summary(Uganda)
@@ -367,18 +360,74 @@ Merged$QFemSchool[Merged$lFemSchool>4.53 & Merged$lFemSchool<=4.622] <-2
 Merged$QFemSchool[Merged$lFemSchool>4.622 & Merged$lFemSchool<=4.697] <-3
 Merged$QFemSchool[Merged$lFemSchool>4.697] <-4
 
-# Creating a new variable with the interaction between FemSchool and FemUnempl
-Merged$Interaction <- Merged$lFemSchool * Merged$lFemUnempl
+# Regressing the model with FemSchool quintiles
+L4 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + Inverse + as.factor(QFemSchool) + lLifeExpect + lDPT + lMeasles,
+            data=Merged, family = 'binomial')
+summary(L4)
+
+# Regressing the model on QFemSchool fixing the other indendent variables at Uganda's mean
+fitted_L4 <- with(Merged,
+                  data.frame(lGDPpc = 7.003,
+                             lRural = 4.461,
+                             lCO2 = -2.52,
+                             lHCexpend = 2.125,
+                             lLifeExpect = 3.98,
+                             lWater = 4.18,
+                             lSanitation = 3.46,
+                             lDPT = 4.199,
+                             lMeasles = 4.235,
+                             Inverse = -2.013,
+                             QFemSchool = factor(1:4)))
+fitted_L4
+
+# Calculating the predicted probabilities
+fitted_L4_final <- predict(L4, newdata = fitted_L4,
+                           type = 'response')
+fitted_L4_final
+
+# Creating a new variable with Inverse by quintiles
+Merged$QInverse <- Merged$Inverse
+Merged$QInverse[Merged$Inverse<=-2.534] <-1
+Merged$QInverse[Merged$Inverse>-2.534 & Merged$Inverse<=-2.092] <-2
+Merged$QInverse[Merged$Inverse>-2.092 & Merged$Inverse<=-1.459] <-3
+Merged$QInverse[Merged$Inverse>-1.459] <-4
+
+# Regressing the model with Inverse quintiles
+L5 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + as.factor(QInverse) + lFemSchool + lLifeExpect + lDPT + lMeasles,
+          data=Merged, family = 'binomial')
+summary(L5)
+
+# Regressing the model on QInverse fixing the other indendent variables at Uganda's mean
+fitted_L5 <- with(Merged,
+                  data.frame(lGDPpc = 7.003,
+                             lRural = 4.461,
+                             lCO2 = -2.52,
+                             lHCexpend = 2.125,
+                             lLifeExpect = 3.98,
+                             lWater = 4.18,
+                             lSanitation = 3.46,
+                             lDPT = 4.199,
+                             lMeasles = 4.235,
+                             lFemSchool = 4.558,
+                             QInverse = factor(1:4)))
+fitted_L5
+
+# Calculating the predicted probabilities
+fitted_L5_final <- predict(L5, newdata = fitted_L5,
+                           type = 'response')
+fitted_L5_final
+
+# Creating a new variable with the interaction between FemSchool and Inverse
+Merged$Interaction <- Merged$lFemSchool * Merged$Inverse
 summary(Merged)
 as.numeric(Merged$Interaction)
 
-
 # Creating a new variable with the interaction by quintiles
 Merged$QInteraction <- Merged$Interaction
-Merged$QInteraction[Merged$lFemSchool<=4.53 & Merged$lFemUnemploy>2.534] <-1
-Merged$QInteraction[Merged$lFemSchool>4.53 & Merged$lFemSchool<=4.622 & Merged$lFemUnemploy<=2.534 & Merged$lFemUnemploy>2.092] <-2
-Merged$QInteraction[Merged$lFemSchool>4.622 & Merged$lFemSchool<=4.697 & Merged$lFemUnemploy<=2.092 & Merged$lFemUnemploy>1.559] <-3
-Merged$QInteraction[Merged$lFemSchool>4.697 & Merged$lFemUnemploy<=1.459] <-4
+Merged$QInteraction[Merged$Interaction<=-11.469] <-1
+Merged$QInteraction[Merged$Interaction>-11.469 & Merged$Interaction<=0.54430] <-2
+Merged$QInteraction[Merged$Interaction>0.54430 & Merged$Interaction<=1.02856] <-3
+Merged$QInteraction[Merged$Interaction>1.02856] <-4
 
 # Regressing the model with the new independent variable without the interaction
 L5 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFemUnempl + lLifeExpect + lDPT + lMeasles + as.factor(QFemSchool),
@@ -386,7 +435,7 @@ L5 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lFe
 summary(L5)
 
 # Regressing the model with the new independent variable with the interaction
-L6 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lLifeExpect + lDPT + lMeasles + as.factor(QInteraction) + lFemUnempl + lFemSchool,
+L6 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + lLifeExpect + lDPT + lMeasles + as.factor(QInteraction) + Inverse + lFemSchool,
           data=Merged, family = 'binomial')
 summary(L6)
 
@@ -402,7 +451,7 @@ fitted_L6 <- with(Merged,
                              lSanitation = 3.46,
                              lDPT = 4.199,
                              lMeasles = 4.235,
-                             lFemUnempl = 1.2576,
+                             Inverse = -2.013,
                              lFemSchool = 4.808,
                              QInteraction = factor(1:4)))
 fitted_L6
@@ -411,6 +460,13 @@ fitted_L6
 fitted_L6_final <- predict(L6, newdata = fitted_L6,
                             type = 'response')
 fitted_L6_final
+
+# plot(L5)
+
+# Using the anova function to evaluate the effect on the deviance of adding the interaction term 
+# anova(L3,L4)
+
+# anova(L4,test="Chisq")
 
 # Creating a .csv file with the final version of the data
 write.csv(Merged, file="MergedData")
