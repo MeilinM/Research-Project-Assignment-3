@@ -21,8 +21,8 @@ b')
 
 # error=FALSE
 # Setting the Working Directory
-setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
-# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject")
+# setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
+setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 
 # Loading the merged file from the Working directory
@@ -104,7 +104,10 @@ IncT <- IncT + ggtitle("Figure 2: Incidence Rate over Time") + theme(plot.title 
 ggsave("fig2.png", width=5, height=5, dpi=100, device = pdf)
 ```
 
-![Figure 2: Incidence Rate over Time] (/fig2.png)
+
+
+![fig2]("https://github.com/MeilinM/Research-Project-Assignment-3/blob/master/fig2.png"")
+
 
 When plotting the incidence rates per country (Figure 3) the countries with high incidence rates can be identified and the ranges of the observations per country are shown.
 

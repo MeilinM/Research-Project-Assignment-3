@@ -3,7 +3,7 @@
 ####################################################################################
 
 # setwd("/Users/Meilin/Desktop/Collaborative Social Data/CollaborativeResearchProject")
-# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
+setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 # 1. Loading Required Packages
 
@@ -231,26 +231,6 @@ HIVcountry <- subset(HIVcountry,!(iso2c=="ZA" & Country!="South Africa"))
 Merged <- merge(dataset, HIVcountry,
                 by = c('iso2c','year'))
 summary(Merged)
-
-# Looking at the observations lost during the merging process
-datasetR <- datasetR[, c(1)]
-HIVcountryR <- HIVcountryR[, c(2)]
-
-FullMerge <- merge(dataset, HIVcountry,
-                     by = c('iso2c'), all.y=TRUE )
-
-rows.in.a1.that.are.not.in.a2  <- function(datasetR,MergedR)
-{
-  datasetR.vec <- apply(datasetR, 1, paste, collapse = "")
-  MergedR.vec <- apply(MergedR, 1, paste, collapse = "")
-  a1.without.a2.rows <- datasetR[!datasetR.vec %in% MergedR.vec,]
-  return(a1.without.a2.rows)
-}
-LostinMerge <- rows.in.a1.that.are.not.in.a2(datasetR,MergedR)
-
-install.packages("xlsm")
-library(xlsx)
-write.xlsx(dataset, "/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/dataset.xlsx")
 
 ####################################################################################
 ########################## CLEANING THE MERGED DATABASE ############################
