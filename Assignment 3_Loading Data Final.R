@@ -2,8 +2,8 @@
 ########## SETTING THE WORKING DIRECTORY AND LOADING REQUIRED PACKAGES #############
 ####################################################################################
 
-# setwd("/Users/Meilin/Desktop/Collaborative Social Data/CollaborativeResearchProject")
-setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
+# setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
+# setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject/Research-Project-Assignment-3")
 
 # 1. Loading Required Packages
 
@@ -255,7 +255,7 @@ Merged <- slide(Merged, Var = "Incidence", GroupVar = "iso2c", slideBy = -1,
 Merged$IncidenceDif <- as.numeric(Merged$Incidence) - as.numeric(Merged$Incidence2)
 
 # Creating a dummy variable for countries with IndicenceDif>0
-Merged$DDif <- as.numeric(Merged$IncidenceDif>0)
+Merged$DDif <- as.numeric(Merged$IncidenceDif<=0)
 
 # 8. Creating .csv to speed up the loading of the data
 
