@@ -90,12 +90,14 @@ The descriptive statistics part consists of the preparation of the variables for
 Table 1 shows the main descriptive statistics of all the variables that can be found in the cleaned dataset (number of observations, mean, standard deviation, and min and max values).
 
 ```{r, echo=FALSE, type = 'latex', header = FALSE}
-stargazer(format(Merged, quote=FALSE, justify="right"), type = "html"), title="Table 1: Descriptive statistics", digits=1, out="table1.txt")
+stargazer(Merged, type = "text", title="Table 1: Descriptive statistics", digits=1, out="table1.txt")
 ```
 
 \pagebreak
 
 The histogram of the dependent variable (Figure 1) shows that the incidence rates are not normally distributed but strongly skewed to the left and only few incidence rates are higher than 1. 
+
+
 
 
 ```{r, echo=FALSE}
@@ -263,6 +265,7 @@ L4 <- glm(DDif ~ lGDPpc + lRural + lCO2 + lHCexpend + lWater + lSanitation + Inv
             data=Merged, family = 'binomial')
 summary(L4)
 ```
+\pagebreak
 
 **Residual vs. Fitted Plot**
 
@@ -272,7 +275,7 @@ summary(L4)
 plot(L4, which = 1)
 ```
 
-*Confidence Intervals*
+**Confidence Intervals**
 
 
 ```{r, echo=FALSE}
@@ -395,7 +398,7 @@ fitted_L6_final
 ```
 \pagebreak
 
-LOGISTIC REGRESSION
+**Logistic Regression**
 
 The rest of this section focuses on logistic regressions using only those variables where no clear multicollinearity was observed.
 The results of the logistic regressions were exported with Stargazer. Table 2 shows the logistic regression results. The results show that out of all the tested variables in the model only the variable Sanitation has a significant impact on changes in HIV/Aids incidence rates.
@@ -406,7 +409,7 @@ The results of the logistic regressions were exported with Stargazer. Table 2 sh
 stargazer(L4, L5, L6, title="Table 2: Logistic Regression Results", type="text",align=TRUE, out="OddsResults.txt")
 ```
 
-PREDICTED PROBABILITIES
+**Predicted Probabilities**
 
 All three predicted probability models fix the values of all independent variables except one to the mean values of Uganda, an interesting case given the failure of this country to contain the spread of HIV/AIDS. The first regression looks at the impact of female school enrolment on the dependent variable.
 
