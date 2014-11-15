@@ -18,11 +18,11 @@ Please report any bugs or suggestions at: https://github.com/MeilinM/Research-Pr
 
 In addition to the Readme file, our repository "Research-Project-Assignment-3" contains:
 
-- An R file
-- An RMD file
+- An R file called FinalR
+- An RMD file called FinalRMD
 - An HTML file
 - A PDF file
-- A BibTeX file
+- A BibTeX file to reference the packages used
 - A subfolder containing images used for the descriptive statistics. 
  
 The PDF and the HTML were created using the knit function of R Studio.
@@ -30,9 +30,9 @@ The PDF and the HTML were created using the knit function of R Studio.
 
 ## How to proceed with the Files in our Repository:
 
-1. The first file that must be opened is the .R file. This code will gather and clean the data. Please note that one of the databases must be first downloadad to the working directory. The link to download the database is included in the code. After running the .R file, the cleaned databases will be stored in the working directory.
+1. The first file that must be opened is the FinalR file. This code will gather and clean the data. Please note that one of the databases must be first downloadad to the working directory. The link to download the database is included in the code. After running the FinalR file, the cleaned databases will be stored in the working directory.
 
-2. the RMD file opens them from the same folder after the working directory is set correctly.
+2. The next file that has to be opened is the FinalRMD file. This file sources the final database from the FinalR file. 
 
 3. The R Packages used for the proposal are cited in the BibTeX file "Packages.bib". As the BibTeX file and the RMD file are dynamically linked, it is important to save both files again in the same folder when running the RMD file.  
 
@@ -46,12 +46,12 @@ We have used data from the World Bank and the UNAIDS database. The data of the W
 
 The Rmd File has the following structure:
 
-* Preparation
+* Data Gathering and Cleaning
 * Descriptive Statistics
 * Inferential Statistics
 * Limitations
-* Bibliography
-* Appendix
+* References
+
 
 ===============================
 
