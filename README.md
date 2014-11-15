@@ -50,7 +50,7 @@ The Rmd File has the following structure:
 * Descriptive Statistics
 * Inferential Statistics
 * Limitations
-* References
+
 
 
 ===============================
