@@ -2,7 +2,7 @@
 title: "Collaborative Research Project - Assignment 3"
 bibliography:
 - RpackageCitations.bib
-- Literature.bib
+- Literature.b
 date: "14 November 2014"
 output: html_document
 number_sections: yes
