@@ -1,8 +1,6 @@
 ---
 title: "Collaborative Research Project - Assignment 3"
-bibliography:
-- RpackageCitations.bib
-- Literature.b
+bibliography: RpackageCitations.bib
 date: "14 November 2014"
 output: html_document
 number_sections: yes
@@ -11,9 +9,8 @@ authors: Meilin Moellenkamp and Nicolas Rosemberg
 toc: yes
 ---
 
-```{r, echo=FALSE, include=FALSE}
+```{r, echo=FALSE, include=FALSE, error=FALSE}
 ### 1. Setting Working Directory & Loading the data
-# error=FALSE
 # Setting the Working Directory
 setwd("/Users/Meilin/Desktop/Collaborative Social Data/Research-Project-Assignment-3")
 # setwd("/Users/Nico/Documents/Hertie/Social science data analysis/CollaborativeResearchProject")
@@ -27,7 +24,7 @@ Merged <- read.csv(file="MergedData")
 ```
 
 
-```{r, echo=FALSE, include=FALSE}
+```{r, echo=FALSE, include=FALSE, error=FALSE}
 
 ### 2. Load Required Packages
 
@@ -134,7 +131,7 @@ ggsave("fig3.png", width=8, height=10, dpi=100)
 
 ```
 
-As the research question investigates why MDG 6.A is not being reached by some countries, the general HIV incidence rate is interesting, but also the decrease in the incidence rate from 2000 to 2015 is even more relevant. As stated in the research proposal Target 6.A of the MDGs specifies that countries should "have halted by 2015 and begun to reverse the spread of HIV/AIDS" [@UN2014]. 
+As the research question investigates why MDG 6.A is not being reached by some countries, the general HIV incidence rate is interesting, but also the decrease in the incidence rate from 2000 to 2015 is even more relevant. As stated in the research proposal Target 6.A of the MDGs specifies that countries should "have halted by 2015 and begun to reverse the spread of HIV/AIDS" [United Nations (2014)]. 
 For this purpose, the dependent variable was lagged by one period and the difference between the lag and the current year was calculated (see Figure 4 in repository).
 
 ```{r, echo=FALSE, include=FALSE}
@@ -448,6 +445,3 @@ In terms of the data used to run the regressions, the relative high number of co
  
 Another shortcoming faced at this stage was the integration of figures from the descriptive statistics into the final report. A transitory solution was to save those pictures in a subfolder of the repository.
 
-\pagebreak
-
-# 5. References
