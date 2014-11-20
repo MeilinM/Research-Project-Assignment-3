@@ -5,7 +5,7 @@ output: html_document
 
 dcdcdef
 
-```{r, echo=FALSE, include=FALSE, error=FALSE, results='asis'}
+```{r, echo=FALSE, error=FALSE, results='asis'}
 library(WDI)
 library(ggmap)
 library(googleVis)
