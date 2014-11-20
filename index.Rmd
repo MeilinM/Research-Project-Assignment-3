@@ -1,0 +1,29 @@
+---
+title: "index.Rmd"
+output: html_document
+---
+
+dcdcdef
+
+```{r, echo=FALSE, include=FALSE, error=FALSE, results='asis'}
+library(WDI)
+library(ggmap)
+library(googleVis)
+co2 <- WDI(indicator = 'EN.ATM.CO2E.PC', start = 2010, end = 2010)
+co2 <- co2[, c('iso2c','EN.ATM.CO2E.PC')]
+
+# Clean
+names(co2) <- c('iso2c', 'CO2 Emissions per Capita')
+co2[, 2] <- round(log(co2[, 2]), digits = 2)
+
+# Plot
+co2_map <- gvisGeoChart(co2, locationvar = 'iso2c',
+                      colorvar = 'CO2 Emissions per Capita',
+                      options = list(
+                          colors = "['#fff7bc', '#d95f0e']"
+                          ))
+
+print(co2_map, tag = 'chart')
+```
+
+                          
