@@ -197,9 +197,8 @@ scatterplotMatrix(~ Incidence + + GDP + GDPpc + Rural + CO2 + LifeExpect + Popul
 
 ```{r, echo=FALSE}
 # Scatterplot of variables for living and working conditions 
-scatterplotMatrix(~ Incidence + Water + Sanitation + Unemploym + HCexpendpc,
+scatterplotMatrix(~ Incidence + Water + Sanitation + Primary + Unemploym + HCexpendpc,
                   transform=TRUE, data=Merged)
-#*** + Primary nicht gefunden!!!
 ```
 
 ```{r, echo=FALSE}
@@ -457,26 +456,6 @@ The results of the logistic regressions were exported with Stargazer. Table 2 sh
 #### SAVING THE REGRESSION OUTPUTS WITH STARGAZER
 # Regression Results of Logistic Regression
 stargazer(L4, L5, L6, title="Table 2: Logistic Regression Results", type="text",align=TRUE, out="OddsResults.txt")
-
-#ERROR:
-#knitr::kable(L4,L5,L6, align = 'c', digits = 2,
-      #caption = 'Logistic Regression Results')
-
-
-# Create custom clean coefficient labels
-#labels <- c('(Intercept)', 'GRE Score', 'GPA Score', '2nd Ranked School',
-            #'3rd Ranked School', '4th Ranked School')
-#stargazer::stargazer(L1, L2, L3, covariate.labels = labels,
-               #title = 'Logistic Regression Estimates of Grad School Acceptance',
-               #digits = 2, type = 'latex', header = FALSE)
-
-
- 
-### labels <- c('(Intercept)', 'GDP per capita', 'Rural', 'CO2',
-            #'Healthcareexpenditure', 'lWater', 'Sanitation', 'Inverse', 'FemSchool2',
-            #'FemSchool3', 'FemSchool4', 'Inverse2', 'Inverse3', 'Inverse4', 'FemSchool',
-            #'Life expectancy', 'DPT', 'Measles', 'Interaction2', 'Interaction3', 'Interaction4', 
-            #'Constant')
 ```
 
 
